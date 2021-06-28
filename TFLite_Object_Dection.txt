@@ -1,0 +1,37 @@
+#가상환경 구축
+source ~/.profile
+mkvirtualenv tf –p python3
+
+-구축 후 바로 가상환경에 접속됨
+
+다음과 같이 (가상환경이름)이 확인되면 성공한 것.
+만약 자동으로 가상환경에 접속되지 않는다면
+-workon 가상환경이름-입력해주기 (ex. workon tf)
+
+#TensorFlow lite 설치
+git clone https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi.git
+
+
+#이름을 간단하게 변경해 주고 폴더 안으로 이동한다. 
+
+mv TensorFlow-Lite-Object-Detection-on-Android-and-raspberry-pi/ tensorfl
+
+cd tensorfl/
+
+#Tensorflow Lite 의존성 모듈과 OpenCV 설치
+
+bash get_pi_requirements.sh 
+
+#구글에서 제공하는 훈련된 샘플 모델 사용
+
+wget https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip
+
+#압축풀기
+unzip coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip -d Sample_TFLite_model
+
+Sample_TFLite_model 이라는 폴더명으로 압축해제 하였다. 
+
+#실행
+python3 TFLite_detection_webcam.py --modeldir=Sample_TFLite_model
+
+​192.168.0.8080 사이트 접속하여 확인
